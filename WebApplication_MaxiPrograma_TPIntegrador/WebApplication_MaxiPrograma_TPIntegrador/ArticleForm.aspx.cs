@@ -24,6 +24,8 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                         txtNombre.Text=articulo.Nombre;
                         txtDesc.Text=articulo.Descripcion;
                         txtPrecio.Text=articulo.precio.ToString();
+                        ddlMarca.SelectedValue=articulo.Marca.Id.ToString();
+                        ddlTipo.SelectedValue=articulo.Categoria.Id.ToString();
                         Help.ValidateImg(imageArticle, articulo.imagenUrl, GlobalVariables.errorImgPath);
                     } else {
                         Help.RedirectToErrorPage(this.Context, "The item you are looking for, does not exist."); return;
@@ -50,6 +52,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             lblArticleForm.Visible=false;
             if(Page.IsValid) {
                 try {
+                    articulo=new Articulo();
                     articulo.Codigo=txtCodigo.Text;
                     if(!(new ArticuloManager().CodeExist(articulo.Codigo))) {
                         articulo.Nombre=txtNombre.Text;
@@ -65,8 +68,9 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                         new ArticuloManager().Agregar(articulo);
                         lblArticleForm.Text="Article has been added to list.";
                         lblArticleForm.CssClass="successfullyValidated";
+                        btnAddArticle.Enabled=false;
                     } else {
-                        Help.RedirectToErrorPage(this.Context, "The item you are looking for, does not exist."); return;
+                        Help.RedirectToErrorPage(this.Context, "The item already exist. Please try another one."); return;
                     }
                     lblArticleForm.Visible=true;
                 } catch(Exception ex) {
@@ -128,7 +132,8 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                     articulo=new ArticuloManager().ObtenerArticuloPorId(int.Parse(id));
                     if(articulo!=null) {
                         new ArticuloManager().Eliminar(articulo);
-                        new FavManager().Delete(new FavManager().SearchFavouriteByIdArticle(articulo.Id)); //debo eliminar los de favorito
+                        FavouriteArticle articuloFavorito = new FavManager().SearchFavouriteByIdArticle(articulo.Id);
+                        if(articuloFavorito!=null) { new FavManager().Delete(articuloFavorito); }//debo eliminar los de favorito
                         lblArticleForm.CssClass="successfullyValidated";
                         lblArticleForm.Text="Article has been successfully deleted.";
                         btnDelete.Enabled=false;
@@ -170,7 +175,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                         Session["idCat"]=idCat;
                     }
                     fillDropDownsWithSelectedItem(ddlMarcaOriginaValue, ddlCatOriginaValue);
-                } else { btnAddCat.Enabled=false; }
+                }
             } catch(Exception ex) {
                 Help.RedirectToErrorPage(this.Context, ex.ToString());
             }
@@ -192,7 +197,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                         Session["idMarca"]=idMarca;
                     }
                     fillDropDownsWithSelectedItem(ddlMarcaOriginaValue, ddlCatOriginaValue);
-                } else { btnAddMarca.Enabled=false; }
+                }
             } catch(Exception ex) {
                 Help.RedirectToErrorPage(this.Context, ex.ToString());
             }

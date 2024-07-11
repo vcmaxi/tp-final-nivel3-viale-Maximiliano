@@ -26,7 +26,10 @@
                     <asp:CommandField HeaderText="" SelectText="&#x1F5D1;" ShowSelectButton="true" />
                 </Columns>
             </asp:GridView>
-            <asp:Button Text="BUY ALL" runat="server" CssClass="btn btn-dark" ID="btnBuy" OnClick="btnBuy_Click" />
+            <div>
+            <asp:Button Text="BUY ALL" runat="server" CssClass="btn btn-dark btn-sm" ID="btnBuy" OnClick="btnBuy_Click" />
+            <asp:Button Text="Return" runat="server" CssClass="btn btn-dark btn-sm" ID="btnReturn" OnClick="btnReturn_Click" />
+            </div>
             <asp:Panel ID="pnlConfirmPurchase" runat="server" CssClass="confirm-purchase-panel" Visible="false">
                 <div class="text-center">
                     <h4>Confirm Purchase</h4>

@@ -11,7 +11,7 @@
         <asp:DropDownList runat="server" ID="ddlSortBy" OnSelectedIndexChanged="ddlSortBy_SelectedIndexChanged" AutoPostBack="true" 
             CssClass="btn btn-secondary btn-sm dropdown-toggle" />
     </div>
-    <div class="row row-cols-1 row-cols-md-5 g-3 mt-1">
+    <div class="row row-cols-1 row-cols-md-3 g-3 mt-1 mb-3">
         <asp:Repeater runat="server" ID="repeaterArt">
             <ItemTemplate>
                 <div class="col">

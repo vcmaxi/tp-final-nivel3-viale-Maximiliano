@@ -39,7 +39,8 @@
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <br />
-                    <asp:TextBox runat="server" AutoPostBack="true" ID="txtImagen" OnTextChanged="txtImagen_TextChanged" CssClass="form-control" />
+                    <asp:TextBox runat="server" AutoPostBack="true" ID="txtImagen" OnTextChanged="txtImagen_TextChanged"
+                        CssClass="form-control" Text="Image Link" onfocus="if (this.value=='Image Link') this.value='';"      onblur="if (this.value=='') this.value='Image Link';" /> 
                     <asp:Image runat="server" ID="imageArticle" CssClass="imageSize mt-4 " />
 
                 </ContentTemplate>

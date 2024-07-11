@@ -4,6 +4,7 @@
 
 <html>
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -82,7 +83,7 @@
                                             CausesValidation="false" />
                                     </li>
                                     <li class="nav-item">
-                                        <asp:Button Text="Register" runat="server" ID="btnRegister" OnClick="btnRegister_Click"
+                                        <asp:Button Text="Register" runat="server" ID="btnRegister_Click" OnClick="btnRegister_Click_Click"
                                             CssClass="btn btn-link" CausesValidation="false" />
                                     </li>
 
@@ -121,15 +122,14 @@
 
             <br />
         </header>
-        <div class="container">
+        <div class="container d-flex flex-column min-vh-100 ">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
 
-        <footer>
-            <br />
-            <div class="text-center fixed-bottom mb-3">
-                <label class="text-dark-emphasis">Copyright - All rights reserved &#169</label>
+        <footer class="bg-dark text-white text-center py-3 mt-auto">
+            <div>
+                <label>Copyright - All rights reserved &#169</label>
             </div>
         </footer>
 

@@ -10,9 +10,10 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
     public partial class MasterPage: System.Web.UI.MasterPage {
 
         protected void Page_init() {
-
-            //User user = new UserManager().GetuserById(1);
-            //Session[GlobalVariables.userString]=user;
+            //if(!Help.IsSessionActive(Context, GlobalVariables.userString)) {
+            //    User user = new UserManager().GetuserById(1);
+            //    Session[GlobalVariables.userString]=user;
+            //}
         }
         protected void Page_Load(object sender, EventArgs e) {
             if(Page is ArticleForm||Page is Favourites||Page is Profile||Page is ShoppingCart||Page is Sales) {
@@ -46,7 +47,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             Session[GlobalVariables.isFromLogin]=true;
             Response.Redirect("Login.aspx", false);
         }
-        protected void btnRegister_Click(object sender, EventArgs e) {
+        protected void btnRegister_Click_Click(object sender, EventArgs e) {
             Session[GlobalVariables.isFromLogin]=false;
             Response.Redirect("Login.aspx", false);
         }

@@ -8,6 +8,7 @@
         public const string isFromFavouriteIcon = "isFromFavouriteIcon";
         public const string isFromDefault = "isFromDefault";
         public const string isFromSales = "isFromSales";
+        public const string isEmailInUse = "isEmailInUse";
 
         public const string userString = "user";
         public const string articleList = "articleList";

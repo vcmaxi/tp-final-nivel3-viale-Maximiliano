@@ -19,7 +19,6 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                 }
             }
         }
-
         protected void btnGuardar_Click(object sender, EventArgs e) {
             lblExtensionError.Visible=false;
             try {
@@ -27,17 +26,21 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                 User user = (User)Help.ActiveUser(this.Context, GlobalVariables.userString);
                 user.Nombre=txtNombre.Text;
                 user.Apellido=txtApellido.Text;
-
                 if(profileImgUpload.PostedFile!=null) {
                     string fileExtension = System.IO.Path.GetExtension(profileImgUpload.PostedFile.FileName).ToLower();
                     if(!(fileExtension.Length==0)) {// el usuario modifica los otros parametros pero no la foto
                         if(fileExtension==".jpg"||fileExtension==".jpeg") {
+
                             string imagePath = Server.MapPath("./Images/");
                             imagePath+="perfil-"+user.Id+fileExtension;
+
+                            System.IO.File.Delete(imagePath); //borro para no tener mas problemas
+
                             profileImgUpload.PostedFile.SaveAs(imagePath);
 
                             user.ImagenPerfil="perfil-"+user.Id+fileExtension;
-                            imgProfile.ImageUrl="./images/"+user.ImagenPerfil;
+
+                            imgProfile.ImageUrl="./Images/"+user.ImagenPerfil;
 
                             // Actualizar la imagen en el MasterPage
                             Image img = (Image)Master.FindControl("imgProfile");
@@ -50,6 +53,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                     }
                 }
                 new UserManager().Updateuser(user);
+                btnGuardar.Enabled=false;
             } catch(Exception ex) {
                 Help.RedirectToErrorPage(this.Context, ex.ToString());
             }

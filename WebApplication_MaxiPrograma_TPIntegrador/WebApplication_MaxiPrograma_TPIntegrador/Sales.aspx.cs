@@ -11,6 +11,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
         List<Articulo> ArticleCartList;
         List<Venta> PurchasingList;
         protected void Page_Load(object sender, EventArgs e) {
+            if(!Help.IsSessionActive(Context, GlobalVariables.userString)) { return; }
             WebAPPHelper.AddToDdl(ddlMarca, "All");
             WebAPPHelper.AddToDdl(ddlCategoria, "All");
             if(!IsPostBack) {

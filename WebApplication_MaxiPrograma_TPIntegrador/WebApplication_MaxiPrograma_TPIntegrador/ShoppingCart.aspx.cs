@@ -9,9 +9,10 @@ using Manager;
 namespace WebApplication_MaxiPrograma_TPIntegrador {
     public partial class ShoppingCart: System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            if(Help.IsUserAdmin(this.Context, GlobalVariables.userString)) {
-                Response.Redirect("Default.aspx", false); return;
-
+            if(Help.IsUserAdmin(this.Context, GlobalVariables.userString)||!Help.IsSessionActive(Context, GlobalVariables.userString)) {
+                if(Help.IsUserAdmin(this.Context, GlobalVariables.userString)) { Response.Redirect("Default.aspx", false); } else {
+                    return;
+                }
             }
             if(!IsPostBack) {
                 TableForDGV();
@@ -74,6 +75,10 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
 
         protected void btnCancelPurchase_Click(object sender, EventArgs e) {
             pnlConfirmPurchase.Visible=false;
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e) {
+            Response.Redirect("Default.aspx", false);
         }
     }
 

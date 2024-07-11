@@ -11,6 +11,9 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             if(WebAPPHelper.IsArticleInCart(this.Context)) {
                 btnAddToCart.Enabled=false;
             }
+            if(!Help.IsSessionActive(Context, GlobalVariables.userString)) {
+                btnAddToCart.Enabled=false;
+            }
 
             if(!IsPostBack) {
                 string id = Request.QueryString["id"];

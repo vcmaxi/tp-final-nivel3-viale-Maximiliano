@@ -83,6 +83,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             dgvArticles.PageIndex=e.NewPageIndex;
             dgvArticles.DataSource=Session[GlobalVariables.articleList];
             dgvArticles.DataBind();
+            ddlSortBy_SelectedIndexChanged1(sender, e);
         }
         protected void btnDetail_Click(object sender, EventArgs e) {
             try {

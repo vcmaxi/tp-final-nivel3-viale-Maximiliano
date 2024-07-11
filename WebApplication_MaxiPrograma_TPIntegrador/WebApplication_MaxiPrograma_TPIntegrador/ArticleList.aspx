@@ -65,7 +65,7 @@
             <asp:BoundField HeaderText="Name" DataField="Nombre" />
             <asp:BoundField HeaderText="Brand" DataField="Marca.Descripcion" />
             <asp:BoundField HeaderText="Category" DataField="Categoria.Descripcion" />
-            <asp:BoundField HeaderText="Price" DataField="Precio" />
+            <asp:BoundField HeaderText="Price" DataField="Precio" DataFormatString="{0:C}" />
             <asp:TemplateField HeaderText="Image">
                 <ItemTemplate>
                     <img src='<%# Eval("ImagenUrl") %>' alt="Imagen"
@@ -74,10 +74,11 @@
                     <asp:Button Text="View More.." runat="server" CssClass="btn btn-outline-dark ms-5 btn-sm" ID="btnDetail" OnClick="btnDetail_Click" CommandArgument='<%#Eval("Id") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField HeaderText="" SelectText="&#x2714" ShowSelectButton="true" Visible="false" />
+            <asp:CommandField HeaderText="Select" SelectText="&#x2714" ShowSelectButton="true" Visible="false" />
         </Columns>
     </asp:GridView>
-
-    <asp:Button Text="Add Article" runat="server" ID="btnAddArticle" CssClass="btn btn-dark btn-sm" OnClick="btnAddArticle_Click" Visible="false" />
-    <asp:Button Text="Return" runat="server" ID="btnReturn" CssClass="btn btn-dark btn-sm" OnClick="btnReturn_Click" />
+    <div>
+        <asp:Button Text="Add Article" runat="server" ID="btnAddArticle" CssClass="btn btn-dark btn-sm" OnClick="btnAddArticle_Click" Visible="false" />
+        <asp:Button Text="Return" runat="server" ID="btnReturn" CssClass="btn btn-dark btn-sm " OnClick="btnReturn_Click" />
+    </div>
 </asp:Content>

@@ -22,6 +22,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             lblErrorLogin.Visible=false;
             if(Page.IsValid) {
                 try {
+
                     if(Help.IsSessionContaining(this.Context, GlobalVariables.isFromLogin)) {
                         User user = new User();
                         user.Email=txtEmail.Text;
@@ -36,7 +37,9 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                         lblErrorLogin.Text="Please enter a correct username and password.<br> Note that password fields is case-sensitive.";
                         lblErrorLogin.Visible=true;
                     } else { //si entro al if y no proviene de login, es un regitro nuevo
-                        panelRegister.Visible=true;
+                        if((bool)Session[GlobalVariables.isEmailInUse]) {
+                            panelRegister.Visible=true;
+                        }
                     }
                 } catch(Exception ex) {
                     Help.RedirectToErrorPage(this.Context, ex.ToString());
@@ -66,6 +69,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
         }
         protected void txtEmail_TextChanged(object sender, EventArgs e) {
             try {
+                bool B = true;
                 if(!(Help.IsSessionContaining(this.Context, GlobalVariables.isFromLogin))) {
                     lblEmailExist.Visible=true;
                     User user = new User();
@@ -74,12 +78,15 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                         lblEmailExist.Text="User already exist. Use another email address.";
                         lblEmailExist.CssClass="validatingForms";
                         lblEmailExist.Visible=true;
+                        B=false;
                     } else {
                         lblEmailExist.Text="Email is not being used. 😃";
                         lblEmailExist.Visible=true;
                         lblEmailExist.CssClass="successfullyValidated";
                     }
                 }
+                Session[GlobalVariables.isEmailInUse]=B;
+                hfFocus.Value=txtPass.ClientID;
             } catch(Exception ex) {
                 Help.RedirectToErrorPage((this.Context), ex.ToString());
             }
