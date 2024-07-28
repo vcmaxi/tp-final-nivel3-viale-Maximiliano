@@ -27,7 +27,7 @@
                 <p class="card-title"><%= articulo.Nombre %></p>
             </div>
             <p class="card-text" aria-multiline="true"><%=articulo.Descripcion %></p>
-            <h5 class="card-text text-decoration-underline text-danger">Price: <%=articulo.precio.ToString("C")%></h5>
+            <h5 class="card-text text-decoration-underline ">Price: <%=articulo.precio.ToString("C")%></h5>
             <div class="mt-3">
                 <%if(!Helper.Help.IsUserAdmin(this.Context, WebApplication_MaxiPrograma_TPIntegrador.GlobalVariables.userString)) { %>
                 <asp:Button Text="Add To Cart" runat="server" CssClass="btn btn-dark btn-sm " ID="btnAddToCart" OnClick="btnAddToCart_Click" />

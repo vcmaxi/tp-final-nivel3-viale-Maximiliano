@@ -45,6 +45,7 @@
     <Compile Include="Cart.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="FavouriteArticle.cs" />
+    <Compile Include="IDescription.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

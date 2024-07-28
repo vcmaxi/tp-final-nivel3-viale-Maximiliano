@@ -7,9 +7,9 @@
     <div class="row">
 
         <%if((bool)Session["isFromLogin"]) {%>
-        <h4 class="text-danger text-decoration-underline">Please Login:</h4>
+        <h4 class=" text-decoration-underline">Please Login:</h4>
         <%} else { %>
-        <h4 class="text-danger text-decoration-underline">Please Register:</h4>
+        <h4 class=" text-decoration-underline">Please Register:</h4>
         <%} %>
 
         <asp:HiddenField ID="hfFocus" runat="server" />

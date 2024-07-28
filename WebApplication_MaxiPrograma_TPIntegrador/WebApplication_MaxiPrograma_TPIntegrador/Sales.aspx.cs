@@ -15,11 +15,15 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             WebAPPHelper.AddToDdl(ddlMarca, "All");
             WebAPPHelper.AddToDdl(ddlCategoria, "All");
             if(!IsPostBack) {
-                Session[GlobalVariables.isFromSales]=true;
-                PrepareFiltroScheme(sender, e);
-                WebAPPHelper.ddlSortByConfiguration(ddlSortBy, this.Context);
-                TableForDGV();
-                ddlSortBy_SelectedIndexChanged(sender, e);
+                try {
+                    Session[GlobalVariables.isFromSales]=true;
+                    PrepareFiltroScheme(sender, e);
+                    WebAPPHelper.ddlSortByConfiguration(ddlSortBy, this.Context);
+                    TableForDGV();
+                    ddlSortBy_SelectedIndexChanged(sender, e);
+                } catch(Exception ex) {
+                    Help.RedirectToErrorPage(this.Context, ex.ToString());
+                }
             }
         }
         private void PrepareFiltroScheme(object sender, EventArgs e) {
@@ -39,6 +43,7 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             Session[GlobalVariables.cantVentas]=PurchasingList.Count;
             dgvSalesList.DataSource=ArticleCartList;
             dgvSalesList.DataBind();
+
             if(WebAPPHelper.IsDgvEmpty(dgvSalesList, lblNoResultsFound, this.Context)) {
                 lblSortBy.Visible=false;
                 ddlSortBy.Visible=false;

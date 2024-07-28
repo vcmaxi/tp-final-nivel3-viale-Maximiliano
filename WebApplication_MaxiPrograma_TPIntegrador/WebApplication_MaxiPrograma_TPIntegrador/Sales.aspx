@@ -46,7 +46,7 @@
                         <%if(ddlCriterio.SelectedItem.Text=="Between") {%>
                         <div class="mx-3">
                             <asp:Label Text="Filter Second Date" runat="server" ID="lblFiltro2" Visible="false" />
-                            <input type="date" name="name" value="" id="calDate2" runat="server" required class="form-control"/>
+                            <input type="date" name="name" value="" id="calDate2" runat="server" required class="form-control" />
                         </div>
 
                         <% } %>
@@ -78,11 +78,7 @@
                     <asp:BoundField HeaderText="Code" DataField="Codigo" />
                     <asp:BoundField HeaderText="Brand" DataField="Marca.Descripcion" />
                     <asp:BoundField HeaderText="Category" DataField="Categoria.Descripcion" />
-                    <asp:TemplateField HeaderText="Price">
-                        <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# "$" + Eval("Precio").ToString() %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    <asp:BoundField HeaderText="Price" DataField="Precio" DataFormatString="{0:C}" />
                     <asp:TemplateField HeaderText="Date">
                         <ItemTemplate>
                             <asp:Label Text="" runat="server" ID="lblFechaVenta" />

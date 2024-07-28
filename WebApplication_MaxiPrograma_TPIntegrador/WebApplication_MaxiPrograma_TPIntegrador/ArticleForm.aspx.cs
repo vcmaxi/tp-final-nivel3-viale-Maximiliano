@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Dominio;
 using Helper;
 using Manager;
@@ -246,15 +247,11 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
             lblPanel.Text="";
         }
         private void fillDropDowns() {
-            ddlMarca.DataSource=new MarcaManager().ListarMarcas();
-            ddlMarca.DataTextField="Descripcion";
-            ddlMarca.DataValueField="Id";
-            ddlMarca.DataBind();
+            List<Marca> marcas = new MarcaManager().ListarMarcas();
+            WebAPPHelper.OrderListByDescripcionAndDataBind(ref marcas, ddlMarca);
 
-            ddlTipo.DataSource=new CategoriaManager().ListarCategorias();
-            ddlTipo.DataTextField="Descripcion";
-            ddlTipo.DataValueField="Id";
-            ddlTipo.DataBind();
+            List<Categoria> categorias = new CategoriaManager().ListarCategorias();
+            WebAPPHelper.OrderListByDescripcionAndDataBind(ref categorias, ddlTipo);
         }
         private void fillDropDownsWithSelectedItem(int ddlMarcaSelected, int ddlTipoSelected) {
             fillDropDowns();

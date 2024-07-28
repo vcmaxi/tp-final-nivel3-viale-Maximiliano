@@ -235,15 +235,11 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
         }
         public static void PrepareFiltroScheme(DropDownList ddlMarca, DropDownList ddlCategoria, CheckBox ckbFiltro) {
             ckbFiltro.Checked=false;
-            ddlMarca.DataSource=new MarcaManager().ListarMarcas();
-            ddlMarca.DataTextField="Descripcion";
-            ddlMarca.DataValueField="Id";
-            ddlMarca.DataBind();
+            List<Marca> marcas = new MarcaManager().ListarMarcas();
+            OrderListByDescripcionAndDataBind(ref marcas, ddlMarca);
 
-            ddlCategoria.DataSource=new CategoriaManager().ListarCategorias();
-            ddlCategoria.DataTextField="Descripcion";
-            ddlCategoria.DataValueField="Id";
-            ddlCategoria.DataBind();
+            List<Categoria> categorias = new CategoriaManager().ListarCategorias();
+            OrderListByDescripcionAndDataBind(ref categorias, ddlCategoria);
         }
         public static void FilterRule(DropDownList ddlCampo, DropDownList ddlCriterio) {
             ddlCriterio.Items.Clear();
@@ -336,6 +332,15 @@ namespace WebApplication_MaxiPrograma_TPIntegrador {
                 context.Response.Redirect("ArticleList.aspx", false);
 
             }
+        }
+        public static void OrderListByDescripcionAndDataBind<T>(ref List<T> list, DropDownList ddl) where T : IDescription {
+            foreach(T item in list) {
+                list.Sort((x, y) => string.Compare(x.Descripcion, y.Descripcion, StringComparison.OrdinalIgnoreCase));
+            }
+            ddl.DataSource=list;
+            ddl.DataTextField="Descripcion";
+            ddl.DataValueField="Id";
+            ddl.DataBind();
         }
     }
 }

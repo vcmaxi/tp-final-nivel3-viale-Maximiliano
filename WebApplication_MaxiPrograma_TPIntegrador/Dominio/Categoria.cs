@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WebApplication_MaxiPrograma_TPIntegrador;
 
 namespace Dominio {
-    public class Categoria {
+    public class Categoria: IDescription {
 
         public int Id { get; set; }
         public string Descripcion { get; set; }
